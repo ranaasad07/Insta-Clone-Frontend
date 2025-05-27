@@ -1,7 +1,9 @@
+import SignUpForm from "./components/Authentication/signUp/signUp"
+import SignInForm from "./components/Authentication/signin/signIn"
 function App() {
   return (
     <>
-      <div> working on </div>
+      <SignUpForm/>
     </>
   )
 }
