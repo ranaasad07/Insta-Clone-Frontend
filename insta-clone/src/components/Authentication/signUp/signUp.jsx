@@ -1,6 +1,8 @@
 // SignUpForm.jsx
 import styles from './signUp.module.css';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import axios from 'axios';
 
 const SignUpForm = () => {
@@ -19,7 +21,7 @@ const SignUpForm = () => {
     };
 
     return (
-<div className="container mt-5 d-flex flex-column align-items-center">
+        <div className="container mt-5 d-flex flex-column align-items-center">
             <div className={`p-4 ${styles.signUpBox}`}>
                 <h1 className="text-center mb-4">Instagram</h1>
                 <p className='text-center'>Sign up to see photos and videos<br /> from your friends</p>
@@ -82,7 +84,8 @@ const SignUpForm = () => {
 
             </div>
             <div className={styles.login}>
-                <p>Have an account? <br/><a href="#">Login</a></p>
+                <p>Have an account? <br /><Link to="/signin" className="btn btn-outline-primary me-2">Login</Link>
+                </p>
             </div>
         </div>
     );

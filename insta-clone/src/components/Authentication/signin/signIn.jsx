@@ -1,14 +1,16 @@
-import './signIn.module.css'
+import styles from './signIn.module.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import { Link } from 'react-router-dom';
+
 // import { useUser } from '../Context/UserContext';
 
 const SignInForm = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const navigate = useNavigate();
-    const { setUser } = useUser();
+    // const { setUser } = useUser();
 
     const handleChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,7 +36,7 @@ const SignInForm = () => {
             <div className={`p-4 ${styles.signUpBox}`}>
                 <h1>Instagram</h1>
                 <form onSubmit={handleSubmit}>
-                    {['email', 'password'].map((field, index) => (
+                    {['Phone number,Email , username', 'password'].map((field, index) => (
                         <div className="form-floating mb-3" key={index}>
                             <input
                                 type={field === 'password' ? 'password' : 'text'}
@@ -52,6 +54,10 @@ const SignInForm = () => {
                         Login
                     </button>
                 </form>
+            </div>
+            <div className={styles.login}>
+                <p>Don't have an account <br /><Link to="/signup" className="btn btn-outline-primary me-2">Sign up</Link>
+                </p>
             </div>
         </div>
     );
