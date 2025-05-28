@@ -1,5 +1,5 @@
 import styles from './signIn.module.css';
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 // import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
@@ -21,9 +21,9 @@ const SignInForm = () => {
             const res = await axios.post('http://localhost:5000/instagram/login', formData);
             const { token } = res.data;
             localStorage.setItem('token', token);
-
-            const decoded = jwtDecode(token);
-            const { username, fullname, email, id } = decoded;
+            alert("user logged in successfully")
+            // const decoded = jwtDecode(token);
+            // const { username, fullname, email, id } = decoded;
             // setUser({ username, fullname, email, id });
             // navigate('/landing');
         } catch (err) {
@@ -36,24 +36,35 @@ const SignInForm = () => {
             <div className={`p-4 ${styles.signUpBox}`}>
                 <h1>Instagram</h1>
                 <form onSubmit={handleSubmit}>
-                    {['Phone number,Email , username', 'password'].map((field, index) => (
-                        <div className="form-floating mb-3" key={index}>
-                            <input
-                                type={field === 'password' ? 'password' : 'text'}
-                                className="form-control"
-                                name={field}
-                                placeholder={field}
-                                value={formData[field]}
-                                onChange={handleChange}
-                                required
-                            />
-                            <label>{field.charAt(0).toUpperCase() + field.slice(1)}</label>
-                        </div>
-                    ))}
+                    <div className="form-floating mb-3">
+                        <input
+                            type="email"
+                            className="form-control"
+                            name="email"
+                            placeholder="Email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                        <label>Email</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input
+                            type="password"
+                            className="form-control"
+                            name="password"
+                            placeholder="Password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                        <label>Password</label>
+                    </div>
                     <button className="btn btn-primary w-100" type="submit">
                         Login
                     </button>
                 </form>
+
             </div>
             <div className={styles.login}>
                 <p>Don't have an account <br /><Link to="/signup" className="btn btn-outline-primary me-2">Sign up</Link>
