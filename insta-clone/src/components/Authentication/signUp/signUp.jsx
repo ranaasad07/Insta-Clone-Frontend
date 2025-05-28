@@ -13,7 +13,7 @@ const SignUpForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:7000/api/auth/register', formData);
+            await axios.post('http://localhost:5000/instagram/Sign_Up', formData);
             alert('User registered successfully!');
         } catch (err) {
             alert('Error registering user');

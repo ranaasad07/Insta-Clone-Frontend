@@ -1,7 +1,7 @@
 import styles from './signIn.module.css';
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const SignInForm = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     // const { setUser } = useUser();
 
     const handleChange = (e) =>
@@ -18,14 +18,14 @@ const SignInForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:7000/api/auth/login', formData);
+            const res = await axios.post('http://localhost:5000/instagram/login', formData);
             const { token } = res.data;
             localStorage.setItem('token', token);
 
             const decoded = jwtDecode(token);
-            const { firstName, lastName, email, id } = decoded;
-            setUser({ firstName, lastName, email, id });
-            navigate('/landing');
+            const { username, fullname, email, id } = decoded;
+            // setUser({ username, fullname, email, id });
+            // navigate('/landing');
         } catch (err) {
             alert('Invalid credentials');
         }
