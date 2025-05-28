@@ -1,15 +1,14 @@
 import styles from './signIn.module.css';
 import React, { useState } from 'react';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
-
 // import { useUser } from '../Context/UserContext';
 
 const SignInForm = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     // const { setUser } = useUser();
 
     const handleChange = (e) =>
@@ -21,11 +20,12 @@ const SignInForm = () => {
             const res = await axios.post('http://localhost:5000/instagram/login', formData);
             const { token } = res.data;
             localStorage.setItem('token', token);
-            alert("user logged in successfully")
-            // const decoded = jwtDecode(token);
-            // const { username, fullname, email, id } = decoded;
+
+            // Decode token and redirect
+            const decoded = jwtDecode(token);
+            const { username, fullname, email, id } = decoded;
             // setUser({ username, fullname, email, id });
-            // navigate('/landing');
+            navigate('/landing');
         } catch (err) {
             alert('Invalid credentials');
         }
@@ -65,10 +65,9 @@ const SignInForm = () => {
                     </button>
                 </form>
 
-            </div>
-            <div className={styles.login}>
-                <p>Don't have an account <br /><Link to="/signup" className="btn btn-outline-primary me-2">Sign up</Link>
-                </p>
+                <div className={styles.login}>
+                    <p>Don't have an account? <br /><Link to="/signup">Sign Up</Link></p>
+                </div>
             </div>
         </div>
     );
