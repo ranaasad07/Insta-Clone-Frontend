@@ -58,10 +58,7 @@ const SignInForm = () => {
                     <p>Have an account? <br/><Link to ="/signUp">Sign Up</Link></p>
                 </div>
             </div>
-            <div className={styles.login}>
-                <p>Don't have an account <br /><Link to="/signup" className="btn btn-outline-primary me-2">Sign up</Link>
-                </p>
-            </div>
+            
         </div>
     );
 };
