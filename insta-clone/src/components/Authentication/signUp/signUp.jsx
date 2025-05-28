@@ -1,27 +1,28 @@
 // SignUpForm.jsx
 import styles from './signUp.module.css';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUpForm = () => {
-    const [formData, setFormData] = useState({ email: '', password: '', fullname: '', username: '' });
-
+    const [formData, setFormData] = useState({ email: '', password: '', fullName: '', username: '' });
+    const navigate  = useNavigate()
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
+    // console.log(formData)
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/instagram/Sign_Up', formData);
+            await axios.post('http://localhost:5000/instagram/SignUp', formData);
+            console.log("Submitting:", formData);
             alert('User registered successfully!');
+            navigate("/")
         } catch (err) {
             alert('Error registering user');
         }
     };
 
     return (
-        <div className="container mt-5 d-flex flex-column align-items-center">
+<div className="container mt-5 d-flex flex-column align-items-center">
             <div className={`p-4 ${styles.signUpBox}`}>
                 <h1 className="text-center mb-4">Instagram</h1>
                 <p className='text-center'>Sign up to see photos and videos<br /> from your friends</p>
@@ -54,9 +55,9 @@ const SignUpForm = () => {
                         <input
                             type="text"
                             className="form-control"
-                            name="fullname"
+                            name="fullName"
                             placeholder="Full Name"
-                            value={formData.fullname}
+                            value={formData.fullName}
                             onChange={handleChange}
                             required
                         />
@@ -84,8 +85,7 @@ const SignUpForm = () => {
 
             </div>
             <div className={styles.login}>
-                <p>Have an account? <br /><Link to="/signin" className="btn btn-outline-primary me-2">Login</Link>
-                </p>
+                <p>Have an account? <br/><Link to ="/">Login</Link></p>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
-import styles from './signIn.module.css';
-// import React, { useState } from 'react';
+import './signIn.module.css'
+import React, { useState } from 'react';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
 
@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom';
 
 const SignInForm = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
-    // const navigate = useNavigate();
-    // const { setUser } = useUser();
+    const navigate = useNavigate();
+    const { setUser } = useUser();
 
     const handleChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,9 +23,9 @@ const SignInForm = () => {
             localStorage.setItem('token', token);
 
             const decoded = jwtDecode(token);
-            const { username, fullname, email, id } = decoded;
-            // setUser({ username, fullname, email, id });
-            // navigate('/landing');
+            const { firstName, lastName, email, id } = decoded;
+            setUser({ firstName, lastName, email, id });
+            navigate('/landing');
         } catch (err) {
             alert('Invalid credentials');
         }
@@ -54,6 +54,9 @@ const SignInForm = () => {
                         Login
                     </button>
                 </form>
+                <div className={styles.login}>
+                    <p>Have an account? <br/><Link to ="/signUp">Sign Up</Link></p>
+                </div>
             </div>
             <div className={styles.login}>
                 <p>Don't have an account <br /><Link to="/signup" className="btn btn-outline-primary me-2">Sign up</Link>
