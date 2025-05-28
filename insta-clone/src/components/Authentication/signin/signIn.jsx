@@ -1,4 +1,4 @@
-import './signIn.module.css'
+import styles from './signIn.module.css'
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const SignInForm = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const navigate = useNavigate();
-    const { setUser } = useUser();
+    // const { setUser } = useUser();
 
     const handleChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +24,7 @@ const SignInForm = () => {
 
             const decoded = jwtDecode(token);
             const { firstName, lastName, email, id } = decoded;
-            setUser({ firstName, lastName, email, id });
+            // setUser({ firstName, lastName, email, id });
             navigate('/landing');
         } catch (err) {
             alert('Invalid credentials');
