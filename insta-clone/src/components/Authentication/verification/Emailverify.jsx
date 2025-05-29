@@ -24,7 +24,7 @@ const Emailverify = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/instagram/verifyemail', formData);
+            const res = await axios.get('http://localhost:5000/instagram/verifyemail', formData);
             // const { token } = res.data;
             // localStorage.setItem('token', token);
 
