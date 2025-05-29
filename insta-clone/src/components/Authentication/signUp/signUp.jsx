@@ -9,22 +9,22 @@ const SignUpForm = () => {
    const emailContext = useContext(AuthenticationContext);
    console.log(emailContext)
 
-    const [formData, setFormData] = useState({ email: '', password: '', fullName: '', username: '',Otp:'' });
+    const [formData, setFormData] = useState({ email: '', password: '', fullName: '', username: ''});
     const navigate  = useNavigate()
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
     // console.log(formData)
-    function generateOTP(){
-      return  Math.floor(100000 + Math.random() * 900000);
+    // function generateOTP(){
+    //   return  Math.floor(100000 + Math.random() * 900000);
 
-    }
+    // }
     // console.log(code);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let OTPFINAL = generateOTP()
+        // let OTPFINAL = generateOTP()
         
         console.log(formData)
         try {
-            setFormData({...formData, Otp: OTPFINAL})
+            // setFormData({...formData, Otp: OTPFINAL})
             emailContext.emailForOtp = formData.email
             console.log(emailContext)
             await axios.post('http://localhost:5000/instagram/SignUp', formData);
