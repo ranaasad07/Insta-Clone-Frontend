@@ -1,12 +1,12 @@
-import styles from './signIn.module.css';
+import styles from './forgetpassword.module.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+// import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
 // import { useUser } from '../Context/UserContext';
 
-const SignInForm = () => {
+const ForgetPassword = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const navigate = useNavigate();
     // const { setUser } = useUser();
@@ -17,15 +17,15 @@ const SignInForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/instagram/login', formData);
-            const { token } = res.data;
-            localStorage.setItem('token', token);
+            // const res = await axios.post('http://localhost:5000/instagram/forgetPassword', formData);
+            // const { token } = res.data;
+            // localStorage.setItem('token', token);
 
             // Decode token and redirect
-            const decoded = jwtDecode(token);
-            const { username, fullname, email, id } = decoded;
+            // const decoded = jwtDecode(token);
+            // const { username, fullname, email, id } = decoded;
             // setUser({ username, fullname, email, id });
-            navigate('/landing');
+            navigate('/verifyforgetotp');
         } catch (err) {
             alert('Invalid credentials');
         }
@@ -48,7 +48,7 @@ const SignInForm = () => {
                         />
                         <label>Email</label>
                     </div>
-                    <div className="form-floating mb-3">
+                    {/* <div className="form-floating mb-3">
                         <input
                             type="password"
                             className="form-control"
@@ -59,9 +59,9 @@ const SignInForm = () => {
                             required
                         />
                         <label>Password</label>
-                    </div>
+                    </div> */}
                     <button className="btn btn-primary w-100" type="submit">
-                        Login
+                        Forget Password
                     </button>
                 </form>
 
@@ -74,4 +74,4 @@ const SignInForm = () => {
     );
 };
 
-export default SignInForm;
+export default ForgetPassword;
