@@ -1,13 +1,20 @@
-import styles from './signIn.module.css';
-import React, { useState } from 'react';
+import styles from './verifyforgetotp.module.css';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+// import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
+import AuthenticationContext from '../../Contexts/AuthenticationContext/AuthenticationContext';
 // import { useUser } from '../Context/UserContext';
 
-const SignInForm = () => {
-    const [formData, setFormData] = useState({ email: '', password: '' });
+// AuthenticationContext
+
+const VerifyForgetOtp = () => {
+    const {emailforgetpassword} = useContext(AuthenticationContext)
+    const [formData, setFormData] = useState({ email: emailforgetpassword, otp: '' });
+    // console.log(emailForOtp)
+    // console.log(formData)
+    // setFormData({...formData, email:emailForOtp})
     const navigate = useNavigate();
     // const { setUser } = useUser();
 
@@ -17,15 +24,18 @@ const SignInForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/instagram/login', formData);
-            const { token } = res.data;
-            localStorage.setItem('token', token);
+            console.log(formData)
+
+            const res = await axios.post('http://localhost:5000/instagram/verifyemail', formData);
+            console.log(formData)
+            // const { token } = res.data;
+            // localStorage.setItem('token', token);
 
             // Decode token and redirect
-            const decoded = jwtDecode(token);
-            const { username, fullname, email, id } = decoded;
+            // const decoded = jwtDecode(token);
+            // const { username, fullname, email, id } = decoded;
             // setUser({ username, fullname, email, id });
-            navigate('/landing');
+            navigate('/changepassword');
         } catch (err) {
             alert('Invalid credentials');
         }
@@ -37,7 +47,8 @@ const SignInForm = () => {
                 <h1>Instagram</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="form-floating mb-3">
-                        <input
+                        <p>otp has send to email {formData.email} </p>
+                        {/* <input
                             type="email"
                             className="form-control"
                             name="email"
@@ -46,32 +57,31 @@ const SignInForm = () => {
                             onChange={handleChange}
                             required
                         />
-                        <label>Email</label>
+                        <label>Email</label> */}
                     </div>
                     <div className="form-floating mb-3">
                         <input
                             type="password"
                             className="form-control"
-                            name="password"
-                            placeholder="Password"
-                            value={formData.password}
+                            name="otp"
+                            placeholder="otp"
+                            value={formData.otp}
                             onChange={handleChange}
                             required
                         />
-                        <label>Password</label>
+                        <label>Enter OTP</label>
                     </div>
                     <button className="btn btn-primary w-100" type="submit">
-                        Login
+                        Verify
                     </button>
                 </form>
 
                 <div className={styles.login}>
                     <p>Don't have an account? <br /><Link to="/signup">Sign Up</Link></p>
-                    <p>forget password? <br /><Link to="/forgetpassword">Forget Password</Link></p>
                 </div>
             </div>
         </div>
     );
 };
 
-export default SignInForm;
+export default VerifyForgetOtp;

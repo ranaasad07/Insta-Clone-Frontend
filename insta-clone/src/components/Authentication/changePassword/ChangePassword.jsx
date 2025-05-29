@@ -1,13 +1,18 @@
-import styles from './signIn.module.css';
-import React, { useState } from 'react';
+import styles from './changepassword.module.css';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
+import AuthenticationContext from '../../Contexts/AuthenticationContext/AuthenticationContext';
 // import { useUser } from '../Context/UserContext';
 
-const SignInForm = () => {
-    const [formData, setFormData] = useState({ email: '', password: '' });
+
+
+const ChangePassword = () => {
+    const {emailforgetpassword} = useContext(AuthenticationContext)
+
+    const [formData, setFormData] = useState({email:emailforgetpassword, password: '', confirmPassword: '' });
     const navigate = useNavigate();
     // const { setUser } = useUser();
 
@@ -17,15 +22,20 @@ const SignInForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/instagram/login', formData);
-            const { token } = res.data;
-            localStorage.setItem('token', token);
+            if (formData.password === formData.confirmPassword) {
 
-            // Decode token and redirect
-            const decoded = jwtDecode(token);
-            const { username, fullname, email, id } = decoded;
-            // setUser({ username, fullname, email, id });
-            navigate('/landing');
+
+
+                const res = await axios.post('http://localhost:5000/instagram/updatepassword', formData);
+                // // const { token } = res.data;
+                // localStorage.setItem('token', token);
+
+                // Decode token and redirect
+                // const decoded = jwtDecode(token);
+                // const { username, fullname, email, id } = decoded;
+                // setUser({ username, fullname, email, id });
+                navigate('/');
+            }
         } catch (err) {
             alert('Invalid credentials');
         }
@@ -38,19 +48,7 @@ const SignInForm = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="form-floating mb-3">
                         <input
-                            type="email"
-                            className="form-control"
-                            name="email"
-                            placeholder="Email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                        <label>Email</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <input
-                            type="password"
+                            type="text"
                             className="form-control"
                             name="password"
                             placeholder="Password"
@@ -60,18 +58,30 @@ const SignInForm = () => {
                         />
                         <label>Password</label>
                     </div>
+                    <div className="form-floating mb-3">
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="confirmPassword"
+                            placeholder="enter password again "
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            required
+                        />
+                        <label>Confirm Password</label>
+                    </div>
                     <button className="btn btn-primary w-100" type="submit">
-                        Login
+                        Save Password
                     </button>
                 </form>
 
                 <div className={styles.login}>
                     <p>Don't have an account? <br /><Link to="/signup">Sign Up</Link></p>
-                    <p>forget password? <br /><Link to="/forgetpassword">Forget Password</Link></p>
+                    {/* <p>forget password? <br /><Link to="/forgetpassword">Forget Password</Link></p> */}
                 </div>
             </div>
         </div>
     );
 };
 
-export default SignInForm;
+export default ChangePassword;
