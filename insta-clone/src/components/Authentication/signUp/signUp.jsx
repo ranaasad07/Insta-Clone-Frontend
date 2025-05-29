@@ -16,9 +16,11 @@ const SignUpForm = () => {
     // console.log(code);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let OTPFINAL = generateOTP
-        setFormData({...formData, Otp: OTPFINAL})
+        let OTPFINAL = generateOTP()
+        
+        console.log(formData)
         try {
+            setFormData({...formData, Otp: OTPFINAL})
             await axios.post('http://localhost:5000/instagram/SignUp', formData);
             console.log("Submitting:", formData);
             alert('User registered successfully!');
