@@ -26,7 +26,7 @@ const ChangePassword = () => {
 
 
 
-                const res = await axios.post('http://localhost:5000/instagram/login', formData);
+                const res = await axios.post('http://localhost:5000/instagram/updatepassword', formData);
                 // // const { token } = res.data;
                 // localStorage.setItem('token', token);
 
