@@ -12,8 +12,8 @@ import AuthenticationContext from '../../Contexts/AuthenticationContext/Authenti
 const Emailverify = () => {
     const {emailForOtp} = useContext(AuthenticationContext)
     const [formData, setFormData] = useState({ email: emailForOtp, otp: '' });
-    // console.log(emailForOtp)
-    // console.log(formData)
+    console.log(emailForOtp)
+    console.log(formData)
     // setFormData({...formData, email:emailForOtp})
     const navigate = useNavigate();
     // const { setUser } = useUser();
@@ -24,6 +24,7 @@ const Emailverify = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            console.log(formData)
             const res = await axios.get('http://localhost:5000/instagram/verifyemail', formData);
             // const { token } = res.data;
             // localStorage.setItem('token', token);
