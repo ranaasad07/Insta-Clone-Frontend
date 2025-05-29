@@ -1,10 +1,14 @@
 // SignUpForm.jsx
 import styles from './signUp.module.css';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import AuthenticationContext from '../../Contexts/AuthenticationContext/AuthenticationContext';
 
 const SignUpForm = () => {
+   const emailContext = useContext(AuthenticationContext);
+   console.log(emailContext)
+
     const [formData, setFormData] = useState({ email: '', password: '', fullName: '', username: '',Otp:'' });
     const navigate  = useNavigate()
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,6 +25,8 @@ const SignUpForm = () => {
         console.log(formData)
         try {
             setFormData({...formData, Otp: OTPFINAL})
+            emailContext.email = formData.email
+            console.log(emailContext)
             await axios.post('http://localhost:5000/instagram/SignUp', formData);
             console.log("Submitting:", formData);
             alert('User registered successfully!');
