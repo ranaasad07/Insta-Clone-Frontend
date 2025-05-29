@@ -15,7 +15,7 @@ const SignUpForm = () => {
             await axios.post('http://localhost:5000/instagram/SignUp', formData);
             console.log("Submitting:", formData);
             alert('User registered successfully!');
-            navigate("/")
+            navigate("/Verify")
         } catch (err) {
             alert(err.response?.data?.message || 'Error registering user');
         }
