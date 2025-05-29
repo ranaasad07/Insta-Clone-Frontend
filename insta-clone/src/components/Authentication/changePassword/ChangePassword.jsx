@@ -1,13 +1,18 @@
 import styles from './changepassword.module.css';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
+import AuthenticationContext from '../../Contexts/AuthenticationContext/AuthenticationContext';
 // import { useUser } from '../Context/UserContext';
 
+
+
 const ChangePassword = () => {
-    const [formData, setFormData] = useState({ password: '', confirmPassword: '' });
+    const {emailforgetpassword} = useContext(AuthenticationContext)
+
+    const [formData, setFormData] = useState({email:emailforgetpassword, password: '', confirmPassword: '' });
     const navigate = useNavigate();
     // const { setUser } = useUser();
 
@@ -21,7 +26,7 @@ const ChangePassword = () => {
 
 
 
-                // const res = await axios.post('http://localhost:5000/instagram/login', formData);
+                const res = await axios.post('http://localhost:5000/instagram/login', formData);
                 // // const { token } = res.data;
                 // localStorage.setItem('token', token);
 

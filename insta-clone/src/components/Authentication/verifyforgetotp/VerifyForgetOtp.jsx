@@ -10,8 +10,8 @@ import AuthenticationContext from '../../Contexts/AuthenticationContext/Authenti
 // AuthenticationContext
 
 const VerifyForgetOtp = () => {
-    const {emailForOtp} = useContext(AuthenticationContext)
-    const [formData, setFormData] = useState({ email: emailForOtp, otp: '' });
+    const {emailforgetpassword} = useContext(AuthenticationContext)
+    const [formData, setFormData] = useState({ email: emailforgetpassword, otp: '' });
     // console.log(emailForOtp)
     // console.log(formData)
     // setFormData({...formData, email:emailForOtp})
@@ -26,7 +26,7 @@ const VerifyForgetOtp = () => {
         try {
             console.log(formData)
 
-            // const res = await axios.post('http://localhost:5000/instagram/verifyemail', formData);
+            const res = await axios.post('http://localhost:5000/instagram/verifyemail', formData);
             console.log(formData)
             // const { token } = res.data;
             // localStorage.setItem('token', token);
