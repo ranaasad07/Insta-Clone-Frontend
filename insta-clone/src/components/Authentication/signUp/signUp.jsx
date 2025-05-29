@@ -25,7 +25,7 @@ const SignUpForm = () => {
         console.log(formData)
         try {
             setFormData({...formData, Otp: OTPFINAL})
-            emailContext.email = formData.email
+            emailContext.emailForOtp = formData.email
             console.log(emailContext)
             await axios.post('http://localhost:5000/instagram/SignUp', formData);
             console.log("Submitting:", formData);

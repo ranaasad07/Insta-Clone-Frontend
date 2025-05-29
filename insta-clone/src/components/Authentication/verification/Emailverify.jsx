@@ -1,13 +1,20 @@
 import styles from './emailverify.module.css';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 // import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
+import AuthenticationContext from '../../Contexts/AuthenticationContext/AuthenticationContext';
 // import { useUser } from '../Context/UserContext';
 
+// AuthenticationContext
+
 const Emailverify = () => {
-    const [formData, setFormData] = useState({ email: '', otp: '' });
+    const {emailForOtp} = useContext(AuthenticationContext)
+    const [formData, setFormData] = useState({ email: emailForOtp, otp: '' });
+    // console.log(emailForOtp)
+    // console.log(formData)
+    // setFormData({...formData, email:emailForOtp})
     const navigate = useNavigate();
     // const { setUser } = useUser();
 
