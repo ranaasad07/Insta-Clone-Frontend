@@ -24,7 +24,9 @@ const ForgetPassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/instagram/forgetPassword', formData);
+            console.log("---------")
+            console.log(formData)
+            const res = await axios.post('http://localhost:5000/instagram/forgetpassword', formData);
 
             alert("otp send to email")
             // const { token } = res.data;
