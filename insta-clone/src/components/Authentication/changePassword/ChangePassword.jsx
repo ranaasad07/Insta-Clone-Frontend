@@ -10,10 +10,11 @@ import AuthenticationContext from '../../Contexts/AuthenticationContext/Authenti
 
 
 const ChangePassword = () => {
-    const {emailforgetpassword} = useContext(AuthenticationContext)
+    const { emailforgetpassword } = useContext(AuthenticationContext)
 
-    const [formData, setFormData] = useState({email:emailforgetpassword, password: '', confirmPassword: '' });
+    const [formData, setFormData] = useState({ email: emailforgetpassword, password: '', confirmPassword: '' });
     const navigate = useNavigate();
+    const [loading,setLoading] = useState(false);
     // const { setUser } = useUser();
 
     const handleChange = (e) =>
@@ -21,6 +22,7 @@ const ChangePassword = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             if (formData.password === formData.confirmPassword) {
 
@@ -34,6 +36,8 @@ const ChangePassword = () => {
                 // const decoded = jwtDecode(token);
                 // const { username, fullname, email, id } = decoded;
                 // setUser({ username, fullname, email, id });
+                alert("your password is updated");
+                setLoading(false);
                 navigate('/');
             }
         } catch (err) {
@@ -70,8 +74,17 @@ const ChangePassword = () => {
                         />
                         <label>Confirm Password</label>
                     </div>
-                    <button className="btn btn-primary w-100" type="submit">
-                        Save Password
+                    <button
+                        className="btn btn-primary w-100 d-flex justify-content-center align-items-center"
+                        type="submit"
+                        disabled={loading}
+                        style={{ height: '40px' }}
+                    >
+                        {loading ? (
+                            <span className={styles.spinner} />
+                        ) : (
+                            "Save Password"
+                        )}
                     </button>
                 </form>
 
