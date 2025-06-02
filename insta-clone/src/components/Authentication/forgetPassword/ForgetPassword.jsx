@@ -1,13 +1,21 @@
-import styles from './signIn.module.css';
-import React, { useState } from 'react';
+import styles from './forgetpassword.module.css';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+// import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
 // import { useUser } from '../Context/UserContext';
+import AuthenticationContext from '../../Contexts/AuthenticationContext/AuthenticationContext';
 
-const SignInForm = () => {
-    const [formData, setFormData] = useState({ email: '', password: '' });
+
+
+const ForgetPassword = () => {
+    const ForgetContext = useContext(AuthenticationContext)
+    const [formData, setFormData] = useState({ email: '' });
+    ForgetContext.emailforgetpassword = formData.email
+    const [loading,setLoading] = useState(false);
+
+    console.log(ForgetContext)
     const navigate = useNavigate();
     // const { setUser } = useUser();
 
@@ -16,18 +24,25 @@ const SignInForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
         try {
-            const res = await axios.post('http://localhost:5000/instagram/login', formData);
-            const { token } = res.data;
-            localStorage.setItem('token', token);
+            console.log("---------")
+            console.log(formData)
+            const res = await axios.post('http://localhost:5000/instagram/forgetpassword', formData);
+
+            alert("otp send to email")
+            setLoading(false);
+            // const { token } = res.data;
+            // localStorage.setItem('token', token);
 
             // Decode token and redirect
-            const decoded = jwtDecode(token);
-            const { username, fullname, email, id } = decoded;
+            // const decoded = jwtDecode(token);
+            // const { username, fullname, email, id } = decoded;
             // setUser({ username, fullname, email, id });
-            navigate('/Feed');
+            navigate('/verifyforgetotp');
         } catch (err) {
             alert('Invalid credentials');
+            setLoading(false)
         }
     };
 
@@ -48,7 +63,7 @@ const SignInForm = () => {
                         />
                         <label>Email</label>
                     </div>
-                    <div className="form-floating mb-3">
+                    {/* <div className="form-floating mb-3">
                         <input
                             type="password"
                             className="form-control"
@@ -59,9 +74,18 @@ const SignInForm = () => {
                             required
                         />
                         <label>Password</label>
-                    </div>
-                    <button className="btn btn-primary w-100" type="submit">
-                        Login
+                    </div> */}
+                    <button
+                        className="btn btn-primary w-100 d-flex justify-content-center align-items-center"
+                        type="submit"
+                        disabled={loading}
+                        style={{ height: '40px' }}
+                    >
+                        {loading ? (
+                            <span className={styles.spinner} />
+                        ) : (
+                            "Verify Email"
+                        )}
                     </button>
                 </form>
 
@@ -74,4 +98,4 @@ const SignInForm = () => {
     );
 };
 
-export default SignInForm;
+export default ForgetPassword;

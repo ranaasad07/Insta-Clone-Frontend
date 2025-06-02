@@ -3,7 +3,6 @@ import SignInForm from "./components/Authentication/signin/signIn";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Emailverify from "./components/Authentication/verification/Emailverify";
 import AuthenticationContext from "./components/Contexts/AuthenticationContext/AuthenticationContext";
-import Feed from "./components/landing/Feed";
 function App() {
   return (
     <BrowserRouter>
@@ -13,7 +12,6 @@ function App() {
           <Route path="/" element={<SignInForm />} />
           <Route path="/SignUp" element={<SignUpForm />} />
           <Route path="/Verify" element={<Emailverify />} />
-          <Route path="/Feed" element={<Feed />} />
 
         </Routes>
       </AuthenticationContext.Provider>
