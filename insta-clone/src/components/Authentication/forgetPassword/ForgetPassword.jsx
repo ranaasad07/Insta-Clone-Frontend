@@ -11,9 +11,8 @@ import AuthenticationContext from '../../Contexts/AuthenticationContext/Authenti
 
 const ForgetPassword = () => {
     const ForgetContext = useContext(AuthenticationContext)
-    const [formData, setFormData] = useState({ email: '' });
+    const [formData, setFormData] = useState({ email: ''});
     ForgetContext.emailforgetpassword = formData.email
-    const [loading,setLoading] = useState(false);
 
     console.log(ForgetContext)
     const navigate = useNavigate();
@@ -24,14 +23,12 @@ const ForgetPassword = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true)
         try {
             console.log("---------")
             console.log(formData)
             const res = await axios.post('http://localhost:5000/instagram/forgetpassword', formData);
 
             alert("otp send to email")
-            setLoading(false);
             // const { token } = res.data;
             // localStorage.setItem('token', token);
 
@@ -42,7 +39,6 @@ const ForgetPassword = () => {
             navigate('/verifyforgetotp');
         } catch (err) {
             alert('Invalid credentials');
-            setLoading(false)
         }
     };
 
@@ -75,17 +71,8 @@ const ForgetPassword = () => {
                         />
                         <label>Password</label>
                     </div> */}
-                    <button
-                        className="btn btn-primary w-100 d-flex justify-content-center align-items-center"
-                        type="submit"
-                        disabled={loading}
-                        style={{ height: '40px' }}
-                    >
-                        {loading ? (
-                            <span className={styles.spinner} />
-                        ) : (
-                            "Verify Email"
-                        )}
+                    <button className="btn btn-primary w-100" type="submit">
+                        Forget Password
                     </button>
                 </form>
 

@@ -6,12 +6,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import AuthenticationContext from '../../Contexts/AuthenticationContext/AuthenticationContext';
 
 const SignUpForm = () => {
-    const emailContext = useContext(AuthenticationContext);
-    console.log(emailContext)
+   const emailContext = useContext(AuthenticationContext);
+   console.log(emailContext)
 
-    const [formData, setFormData] = useState({ email: '', password: '', fullName: '', username: '' });
-    const [loading, setLoading] = useState(false);
-    const navigate = useNavigate()
+    const [formData, setFormData] = useState({ email: '', password: '', fullName: '', username: ''});
+    const navigate  = useNavigate()
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
     // console.log(formData)
     // function generateOTP(){
@@ -21,24 +20,25 @@ const SignUpForm = () => {
     // console.log(code);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true); // Start spinner
-
+        // let OTPFINAL = generateOTP()
+        
+        console.log(formData)
         try {
-            emailContext.emailForOtp = formData.email;
+            // setFormData({...formData, Otp: OTPFINAL})
+            emailContext.emailForOtp = formData.email
+            console.log(emailContext)
             await axios.post('http://localhost:5000/instagram/SignUp', formData);
-                                 
-            alert('User registered successfully!');  
-            setLoading(false);
-            navigate("/Verify");                    
-
+            console.log("Submitting:", formData);
+            alert('User registered successfully!');
+            navigate("/Verify")
         } catch (err) {
             alert(err.response?.data?.message || 'Error registering user');
-            setLoading(false); 
         }
+
     };
 
     return (
-        <div className="container mt-5 d-flex flex-column align-items-center">
+<div className="container mt-5 d-flex flex-column align-items-center">
             <div className={`p-4 ${styles.signUpBox}`}>
                 <h1 className="text-center mb-4">Instagram</h1>
                 <p className='text-center'>Sign up to see photos and videos<br /> from your friends</p>
@@ -96,25 +96,12 @@ const SignUpForm = () => {
                             By signing up, you agree to our <a href="#">Terms</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookies Policy</a>.
                         </p>
                     </div>
-                    <button
-                        className="btn btn-primary w-100 d-flex justify-content-center align-items-center"
-                        type="submit"
-                        disabled={loading}
-                        style={{ height: '40px' }}
-                    >
-                        {loading ? (
-                            <span className={styles.spinner} />
-                        ) : (
-                            "Sign up"
-                        )}
-                    </button>
-
-
+                    <button className="btn btn-primary w-100" type="submit">Sign up</button>
                 </form>
 
             </div>
             <div className={styles.login}>
-                <p>Have an account? <br /><Link to="/">Login</Link></p>
+                <p>Have an account? <br/><Link to ="/">Login</Link></p>
             </div>
         </div>
     );
