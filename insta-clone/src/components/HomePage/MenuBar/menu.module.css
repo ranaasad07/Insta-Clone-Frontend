@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom:0;
+
+}
+.logo{
+    padding: 40px;
+}
+.sidebar ul li{
+    list-style: none;
+    line-height: 54px;
+}
+.sidebar ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.link {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #282828;
+    text-decoration: none;
+    gap: 10px; /* Optional for spacing between icon and text */
+}
