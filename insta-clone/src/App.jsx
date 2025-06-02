@@ -6,6 +6,7 @@ import AuthenticationContext from "./components/Contexts/AuthenticationContext/A
 import ForgetPassword from "./components/Authentication/forgetPassword/ForgetPassword";
 import VerifyForgetOtp from "./components/Authentication/verifyforgetotp/VerifyForgetOtp";
 import ChangePassword from "./components/Authentication/changePassword/ChangePassword";
+import HomePage from "./components/HomePage/HomePage";
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,7 @@ function App() {
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/VerifyForgetOtp" element={<VerifyForgetOtp />} />
           <Route path="/changepassword" element={<ChangePassword />} />
+          <Route path="/landing" element={<HomePage />} />
 
         </Routes>
       </AuthenticationContext.Provider>
