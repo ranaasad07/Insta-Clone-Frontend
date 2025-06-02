@@ -11,24 +11,25 @@ import notifications from '../../../assets/notifications.png'
 import create from '../../../assets/create.png'
 import dashboard from '../../../assets/dashboard.png'
 import bar from '../../../assets/bar.png'
-const Menu = () => {
+const Menu = ({onSelectTab}) => {
+  console.log(onSelectTab)
   return (
     <>
       <div className={styles.sidebar}>
         <div className={styles.logo}><img src={logo} alt="lgog" /></div>
         <ul>
           <li>
-            <Link to='' className={styles.link}><img src={home} alt="_" /> Home</Link>
+            <button onClick={() => onSelectTab("home")} className={styles.link}><img src={home} alt="_" /> Home</button>
           </li>
-          <li><Link to='' className={styles.link}><img src={search} alt="_" />  Search</Link></li>
-          <li><Link to='' className={styles.link}><img src={explore} alt="_" />  Explore</Link></li>
-          <li><Link to='' className={styles.link}><img src={reels} alt="_" /> Reels</Link></li>
-          <li><Link to='' className={styles.link}><img src={messages} alt="_" />  Messages</Link></li>
-          <li><Link to='' className={styles.link}><img src={notifications} alt="_" />  Notifications</Link></li>
-          <li> <Link to='' className={styles.link}><img src={create} alt="_" />  Create</Link></li>
-          <li> <Link to='' className={styles.link}><img src={dashboard} alt="_" />  Dashboard</Link></li>
-          <li><Link to='' className={styles.link}><img src={bar} alt="_" />  Profile</Link></li>
-          <li><Link to='' className={styles.link}><img src={bar} alt="_" />  Menu</Link></li>
+          <li><button onClick={() => onSelectTab("search")} className={styles.link}><img src={search} alt="_" />  Search</button></li>
+          <li><button onClick={() => onSelectTab("explore")} className={styles.link}><img src={explore} alt="_" />  Explore</button></li>
+          <li><button onClick={() => onSelectTab("reels")} className={styles.link}><img src={reels} alt="_" /> Reels</button></li>
+          <li><button onClick={() => onSelectTab("messages")} className={styles.link}><img src={messages} alt="_" />  Messages</button></li>
+          <li><button onClick={() => onSelectTab("notifications")} className={styles.link}><img src={notifications} alt="_" />  Notifications</button></li>
+          <li> <button onClick={() => onSelectTab("dashboard")} className={styles.link}><img src={dashboard} alt="_" />  Dashboard</button></li>
+          <li> <button onClick={() => onSelectTab("create")} className={styles.link}><img src={create} alt="_" />  Create</button></li>
+          <li><button onClick={() => onSelectTab("profile")} className={styles.link}><img src={bar} alt="_" />  Profile</button></li>
+          <li><button onClick={() => onSelectTab("menu")} className={styles.link}><img src={bar} alt="_" />  Menu</button></li>
         </ul>
       </div>
     </>
