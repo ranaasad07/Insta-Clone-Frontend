@@ -27,7 +27,7 @@ const Menu = () => {
           <li><Link to='' className={styles.link}><img src={notifications} alt="_" />  Notifications</Link></li>
           <li> <Link to='' className={styles.link}><img src={create} alt="_" />  Create</Link></li>
           <li> <Link to='' className={styles.link}><img src={dashboard} alt="_" />  Dashboard</Link></li>
-          <li><Link to='' className={styles.link}><img src={bar} alt="_" />  Profile</Link></li>
+          <li><Link to='' className={styles.link}><img src={_} alt="_" />  Profile</Link></li>
           <li><Link to='' className={styles.link}><img src={bar} alt="_" />  Menu</Link></li>
         </ul>
       </div>
