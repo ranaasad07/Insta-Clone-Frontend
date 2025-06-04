@@ -6,36 +6,34 @@ import { Link, useNavigate } from 'react-router-dom';
 import AuthenticationContext from '../../Contexts/AuthenticationContext/AuthenticationContext';
 
 const SignUpForm = () => {
-    const emailContext = useContext(AuthenticationContext);
-    console.log(emailContext)
 
     const [formData, setFormData] = useState({ email: '', password: '', fullName: '', username: '' });
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-    // console.log(formData)
-    // function generateOTP(){
-    //   return  Math.floor(100000 + Math.random() * 900000);
+    const {  setEmailContext, } = useContext(AuthenticationContext);
 
-    // }
-    // console.log(code);
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         try {
-            emailContext.emailForOtp = formData.email;
-            await axios.post('http://localhost:5000/instagram/SignUp', formData);
-                                 
-            alert('User registered successfully!');  
+            setEmailContext({ emailForOtp: formData.email });
+            console.log('Stored in emailContext:', formData.email);
+
+
+            const response = await axios.post('http://localhost:5000/instagram/SignUp', formData);
+
+            alert('User registered successfully!');
             setLoading(false);
-            navigate("/Verify");                    
+            navigate("/Verify");
 
         } catch (err) {
             alert(err.response?.data?.message || 'Error registering user');
-            setLoading(false); 
+            setLoading(false);
         }
     };
+
 
     return (
         <div className="container mt-5 d-flex flex-column align-items-center">
