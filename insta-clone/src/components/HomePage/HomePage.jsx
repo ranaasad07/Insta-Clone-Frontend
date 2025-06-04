@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Menu from './MenuBar/Menu'
 import Profile from './Profile/Profile'
-import UserInfo from './Profile/UserInfo/UserInfo'
+// import UserInfo from './Profile/UserInfo/UserInfo'
 // UserInfo
 
 
