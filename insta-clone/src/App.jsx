@@ -2,7 +2,6 @@ import SignUpForm from "./components/Authentication/signUp/signUp";
 import SignInForm from "./components/Authentication/signin/signIn";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Emailverify from "./components/Authentication/verification/Emailverify";
-import AuthenticationContext from "./components/Contexts/AuthenticationContext/AuthenticationContext";
 import AuthenticationProvider from "./components/Contexts/AuthenticationContext/AuthenticationProvider";
 import ForgetPassword from "./components/Authentication/forgetPassword/ForgetPassword";
 import VerifyForgetOtp from "./components/Authentication/verifyforgetotp/VerifyForgetOtp";

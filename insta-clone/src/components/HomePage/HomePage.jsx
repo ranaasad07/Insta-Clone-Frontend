@@ -18,7 +18,7 @@ const HomePage = () => {
             <Menu activeTab={tab} onSelectTab={setTab} />
           </div>
           <div className='col-8'>
-            {centerContent[tab] || <p>page not found</p>}
+            {centerContent[tab] || <h4>Component creation is in progress ... plz stay with us for updates</h4>}
           </div>
         </div>
       </div>
