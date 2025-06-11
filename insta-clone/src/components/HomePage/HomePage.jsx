@@ -1,33 +1,29 @@
-import React, { useState } from 'react'
-import Menu from './MenuBar/Menu'
-import Profile from './Profile/Profile'
-// import UserInfo from './Profile/UserInfo/UserInfo'
-// UserInfo
-
+import React, { useState } from 'react';
+import Menu from './MenuBar/Menu';
+import Profile from './Profile/Profile';
 
 const HomePage = () => {
-  const [tab, setTab] = useState("home")
+  const [tab, setTab] = useState("home");
 
   const centerContent = {
     profile: <Profile onSelectTab={setTab} />,
     home: <p>home</p>,
-    // editProfile: <UserInfo onSelectTab={setTab}/>,
-  }
-  console.log(tab)
+  };
+
   return (
     <>
       <div className='container-fluid'>
         <div className='row'>
-          <div className='col-3'><Menu onSelectTab={setTab} /></div>
-          <div className='col-6'>
-            {centerContent[tab] || <p>page not found</p>}
-
+          <div className='col-3'>
+            <Menu activeTab={tab} onSelectTab={setTab} />
           </div>
-          <div className='col-3'></div>
+          <div className='col-8'>
+            {centerContent[tab] || <h4>Component creation is in progress ... plz stay with us for updates</h4>}
+          </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

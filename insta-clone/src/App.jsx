@@ -2,7 +2,7 @@ import SignUpForm from "./components/Authentication/signUp/signUp";
 import SignInForm from "./components/Authentication/signin/signIn";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Emailverify from "./components/Authentication/verification/Emailverify";
-import AuthenticationContext from "./components/Contexts/AuthenticationContext/AuthenticationContext";
+import AuthenticationProvider from "./components/Contexts/AuthenticationContext/AuthenticationProvider";
 import ForgetPassword from "./components/Authentication/forgetPassword/ForgetPassword";
 import VerifyForgetOtp from "./components/Authentication/verifyforgetotp/VerifyForgetOtp";
 import ChangePassword from "./components/Authentication/changePassword/ChangePassword";
@@ -10,7 +10,7 @@ import HomePage from "./components/HomePage/HomePage";
 function App() {
   return (
     <BrowserRouter>
-      <AuthenticationContext.Provider value={{}}>
+    <AuthenticationProvider>
         <Routes>
 
           <Route path="/" element={<SignInForm />} />
@@ -22,7 +22,7 @@ function App() {
           <Route path="/landing" element={<HomePage />} />
 
         </Routes>
-      </AuthenticationContext.Provider>
+        </AuthenticationProvider>
 
 
     </BrowserRouter>

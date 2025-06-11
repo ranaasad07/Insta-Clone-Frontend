@@ -1,0 +1,254 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.setting{
+ padding-right: 30px;
+}
+.setting ul {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+}
+
+.setting ul li {
+  width: 100%;
+}
+
+.setting {
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0; */
+  /* width: 250px;  */
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  z-index: 1000;
+  overflow-y:scroll ;
+}
+
+.buttonz {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 16px;
+  color: #282828;
+  background: none;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buttonz i {
+  font-size: 20px;
+  margin-right: 15px; 
+  min-width: 20px;
+}
+
+.setting ul li:hover,
+.active {
+  background-color: #F4F4F4;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.profilePic{
+  display: flex;
+}
+.profile {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  /* border: 2px solid #ddd; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+.profilePic{
+  display: flex;
+  align-items: center;
+}
+.usernames{
+  text-align: left;
+  margin: 0 10px;
+}
+.usernames h6{
+  font-weight: bold;
+}
+.usernames p{
+  font-size: 14px;
+  margin-top: -8px;
+}
+.changeprofile{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid #000; */
+  padding: 15px 20px;
+  background-color: #EFEFEF;
+  border-radius: 20px;
+
+
+}
+.changebutton button{
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  background-color: #4150F7;
+  color: #fff;
+  border-radius: 10px;
+  padding: 6px 16px;
+}
+
+.websiteLinks input{
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 14px;
+  background-color: #EFEFEF;
+  border: none;
+}
+.websiteLinks p{
+  font-size: 13px;
+}
+.bioInput {
+  width: 100%;
+  height: 100px; 
+  border-radius: 20px;
+  padding: 15px;
+  resize: none; 
+  overflow-y: auto;
+  white-space: pre-wrap; 
+  word-wrap: break-word;
+  font-size: 1rem;
+}
+.gender{
+  margin: 14px 0;
+}
+.gender select{
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 15px;
+}
+.gender p{
+  font-size: 12px;
+}
+.suggestions {
+  width: 100%;
+}
+
+.suggestionContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border: 1px solid grey;
+  border-radius: 14px;
+}
+.suggestionContent p{
+  font-size: 12px;
+}
+
+.suggestionHeading {
+  flex: 1;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 34px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.4s;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #3897f0;
+}
+
+input:checked + .slider::before {
+  transform: translateX(24px);
+}
+.submit{
+  display: flex;
+  justify-content: end;
+  margin: 20px 0;
+}
+.submit button{
+  width: 50%;
+  padding: 10px 30px;
+  border-radius: 12px;
+  background-color: #4150F7;
+  font-size: 14px;
+  border: none;
+  color: #fff;
+}
+
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.2);  /* light transparent background */
+  border-top: 3px solid white;                /* white top for contrast */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

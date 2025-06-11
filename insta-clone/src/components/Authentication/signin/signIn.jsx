@@ -1,35 +1,43 @@
 import styles from './signIn.module.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import { Link } from 'react-router-dom';
-// import { useUser } from '../Context/UserContext';
+import AuthenticationContext from '../../Contexts/AuthenticationContext/AuthenticationContext';
 
 const SignInForm = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const navigate = useNavigate();
-    // const { setUser } = useUser();
+
 
     const handleChange = (e) =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const res = await axios.post('http://localhost:5000/instagram/login', formData);
-            const { token } = res.data;
-            localStorage.setItem('token', token);
+    const { setEmailContext } = useContext(AuthenticationContext);
 
-            // Decode token and redirect
-            const decoded = jwtDecode(token);
-            const { username, fullname, email, id } = decoded;
-            // setUser({ username, fullname, email, id });
-            navigate('/landing');
-        } catch (err) {
-            alert('Invalid credentials');
-        }
-    };
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        const res = await axios.post('http://localhost:5000/instagram/login', formData);
+        const { token } = res.data;
+
+        const decoded = jwtDecode(token);
+        const { email } = decoded;
+
+        setEmailContext({ emailForOtp: email });
+
+        localStorage.setItem('token', token);
+
+        console.log("Logged in email stored in context:", email); 
+
+        navigate('/landing');
+    } catch (err) {
+        alert('Invalid credentials');
+        console.error(err);
+    }
+};
+
+
 
     return (
         <div className="container mt-5" style={{ maxWidth: '400px' }}>
@@ -67,7 +75,7 @@ const SignInForm = () => {
 
                 <div className={styles.login}>
                     <p>Don't have an account? <br /><Link to="/signup">Sign Up</Link></p>
-                    <p>forget password? <br /><Link to="/forgetpassword">Forget Password</Link></p>
+                    <p>Forget password? <br /><Link to="/forgetpassword">Forget Password</Link></p>
                 </div>
             </div>
         </div>

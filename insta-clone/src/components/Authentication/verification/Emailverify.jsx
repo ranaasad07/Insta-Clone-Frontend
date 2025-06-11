@@ -5,8 +5,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import AuthenticationContext from '../../Contexts/AuthenticationContext/AuthenticationContext';
 
 const Emailverify = () => {
-    const { emailForOtp } = useContext(AuthenticationContext);
-    const [formData, setFormData] = useState({ email: emailForOtp, otp: '' });
+    const { emailContext } = useContext(AuthenticationContext);
+    const [formData, setFormData] = useState({ email: emailContext.emailForOtp, otp: '' });
     const navigate = useNavigate();
 
     const handleChange = (e) =>

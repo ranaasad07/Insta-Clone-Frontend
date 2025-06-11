@@ -1,39 +1,121 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
 import styles from './menu.module.css';
-import logo from '../../../assets/instalogo.png'
-import home from '../../../assets/home.png'
-import search from '../../../assets/search.png'
-import explore from '../../../assets/explores.png'
-import reels from '../../../assets/reels.png'
-import messages from '../../../assets/messages.png'
-import notifications from '../../../assets/notifications.png'
-import create from '../../../assets/create.png'
-import dashboard from '../../../assets/dashboard.png'
-import bar from '../../../assets/bar.png'
-const Menu = ({onSelectTab}) => {
-  console.log(onSelectTab)
+import logo from '../../../assets/instalogo.png';
+import { useContext, useState, useEffect } from 'react';
+import axios from 'axios'
+import AuthenticationContext from '../../Contexts/AuthenticationContext/AuthenticationContext'
+const Menu = ({ onSelectTab, activeTab }) => {
+  const { emailContext } = useContext(AuthenticationContext);
+  const email = emailContext?.emailForOtp;
+
+  const [profilePicture, setProfilePicture] = useState(null);
+
+  useEffect(() => {
+    const fetchProfilePicture = async () => {
+      if (!email) return;
+      try {
+        const response = await axios.get(`http://localhost:5000/instagram/getusernames/${email}`);
+        setProfilePicture(response.data.profilePic);
+      } catch (error) {
+        console.error('Failed to load profile picture:', error);
+      }
+    };
+
+    fetchProfilePicture();
+  }, [email]);
+
+  const menuItems = [
+    { name: "home", icon: "fa-house", label: "Home" },
+    { name: "search", icon: "fa-magnifying-glass", label: "Search" },
+    { name: "explore", icon: "fa-compass", label: "Explore" },
+    { name: "reels", icon: "fa-brands fa-square-youtube", label: "Reels" },
+    { name: "messages", icon: "fa-brands fa-facebook-messenger", label: "Messages" },
+    { name: "notifications", icon: "fa-regular fa-heart", label: "Notifications" },
+    { name: "create", icon: "fa-regular fa-square-plus", label: "Create" },
+    { name: "dashboard", icon: "fa-square-poll-horizontal", label: "Dashboard" },
+    { name: "profile", icon: "fa-circle-user", label: "Profile", isProfile: true },
+    { name: "menu", icon: "fa-bars", label: "Menu" },
+  ];
   return (
     <>
       <div className={styles.sidebar}>
-        <div className={styles.logo}><img src={logo} alt="lgog" /></div>
+        <div className={styles.logo}>
+          <img src={logo} alt="logo" />
+        </div>
         <ul>
-          <li>
-            <button onClick={() => onSelectTab("home")} className={styles.link}><img src={home} alt="_" /> Home</button>
-          </li>
-          <li><button onClick={() => onSelectTab("search")} className={styles.link}><img src={search} alt="_" />  Search</button></li>
-          <li><button onClick={() => onSelectTab("explore")} className={styles.link}><img src={explore} alt="_" />  Explore</button></li>
-          <li><button onClick={() => onSelectTab("reels")} className={styles.link}><img src={reels} alt="_" /> Reels</button></li>
-          <li><button onClick={() => onSelectTab("messages")} className={styles.link}><img src={messages} alt="_" />  Messages</button></li>
-          <li><button onClick={() => onSelectTab("notifications")} className={styles.link}><img src={notifications} alt="_" />  Notifications</button></li>
-          <li> <button onClick={() => onSelectTab("dashboard")} className={styles.link}><img src={dashboard} alt="_" />  Dashboard</button></li>
-          <li> <button onClick={() => onSelectTab("create")} className={styles.link}><img src={create} alt="_" />  Create</button></li>
-          <li><button onClick={() => onSelectTab("profile")} className={styles.link}><img src={bar} alt="_" />  Profile</button></li>
-          <li><button onClick={() => onSelectTab("menu")} className={styles.link}><img src={bar} alt="_" />  Menu</button></li>
+          {menuItems.map((item) => (
+            <li key={item.name}>
+              <button
+                onClick={() => onSelectTab(item.name)}
+                className={`${styles.link} ${activeTab === item.name ? styles.active : ""}`}
+              >
+                {item.isProfile && profilePicture ? (
+                  <img
+                    src={profilePicture}
+                    alt="Profile"
+                    className={styles.profileIcon}
+                  />
+                ) : (
+                  <i className={`fa-solid ${item.icon}`}></i>
+                )}
+                {item.label}
+              </button>
+            </li>
+          ))}
         </ul>
+
+
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Menu
+
+// const Menu = ({ onSelectTab, activeTab }) => {
+//   const menuItems = [
+//     { name: "home", icon: "fa-house", label: "Home" },
+//     { name: "search", icon: "fa-magnifying-glass", label: "Search" },
+//     { name: "explore", icon: "fa-compass", label: "Explore" },
+//     { name: "reels", icon: "fa-brands fa-square-youtube", label: "Reels" },
+//     { name: "messages", icon: "fa-brands fa-facebook-messenger", label: "Messages" },
+//     { name: "notifications", icon: "fa-regular fa-heart", label: "Notifications" },
+//     { name: "create", icon: "fa-regular fa-square-plus", label: "Create" },
+//     { name: "dashboard", icon: "fa-square-poll-horizontal", label: "Dashboard" },
+//     { name: "profile", icon: "fa-circle-user", label: "Profile", isProfile: true },
+//     { name: "menu", icon: "fa-bars", label: "Menu" },
+//   ];
+
+//   return (
+//     <>
+//       <div className={styles.sidebar}>
+//         <div className={styles.logo}>
+//           <img src={logo} alt="logo" />
+//         </div>
+//         <ul>
+//           {menuItems.map((item) => (
+//             <li key={item.name}>
+//               <button
+//                 onClick={() => onSelectTab(item.name)}
+//                 className={`${styles.link} ${activeTab === item.name ? styles.active : ""}`}
+//               >
+//                 {item.isProfile && profilePicture ? (
+//                   <img
+//                     src={profilePicture}
+//                     alt="Profile"
+//                     className={styles.profileIcon}
+//                   />
+//                 ) : (
+//                   <i className={`fa-solid ${item.icon}`}></i>
+//                 )}
+//                 {item.label}
+//               </button>
+//             </li>
+//           ))}
+//         </ul>
+
+//       </div>
+//     </>
+//   );
+// };
+
+
+export default Menu;
