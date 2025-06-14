@@ -45,7 +45,15 @@ const Menu = ({ onSelectTab, activeTab }) => {
           {menuItems.map((item) => (
             <li key={item.name}>
               <button
-                onClick={() => onSelectTab(item.name)}
+                // onClick={() => onSelectTab(item.name)}
+                onClick={() => {
+                  if (item.name === 'create') {
+                    onSelectTab(prev => prev);
+                    onSelectTab('triggerUploadPopup');
+                  } else {
+                    onSelectTab(item.name);
+                  }
+                }}
                 className={`${styles.link} ${activeTab === item.name ? styles.active : ""}`}
               >
                 {item.isProfile && profilePicture ? (
